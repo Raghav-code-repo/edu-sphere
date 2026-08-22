@@ -46,6 +46,24 @@ import { FacultyReports } from '@/pages/faculty/FacultyReports';
 import { FacultyProfile } from '@/pages/faculty/FacultyProfile';
 import { FacultySettings } from '@/pages/faculty/FacultySettings';
 import { AdminDashboard } from '@/pages/admin/AdminDashboard';
+import { AdminUsers } from '@/pages/admin/AdminUsers';
+import { AdminStudents } from '@/pages/admin/AdminStudents';
+import { AdminParents } from '@/pages/admin/AdminParents';
+import { AdminFaculty } from '@/pages/admin/AdminFaculty';
+import { AdminCourses } from '@/pages/admin/AdminCourses';
+import { AdminClasses } from '@/pages/admin/AdminClasses';
+import { AdminSubjects } from '@/pages/admin/AdminSubjects';
+import { AdminDepartments } from '@/pages/admin/AdminDepartments';
+import { AdminAttendance } from '@/pages/admin/AdminAttendance';
+import { AdminAssignments } from '@/pages/admin/AdminAssignments';
+import { AdminExams } from '@/pages/admin/AdminExams';
+import { AdminFees } from '@/pages/admin/AdminFees';
+import { AdminAnnouncements } from '@/pages/admin/AdminAnnouncements';
+import { AdminReports } from '@/pages/admin/AdminReports';
+import { AdminAnalytics } from '@/pages/admin/AdminAnalytics';
+import { AdminDocuments } from '@/pages/admin/AdminDocuments';
+import { AdminAuditLogs } from '@/pages/admin/AdminAuditLogs';
+import { AdminSettings } from '@/pages/admin/AdminSettings';
 import { RoleRedirect, ProtectedRoute } from '@/features/auth';
 import { UnauthorizedPage } from '@/pages/Unauthorized';
 
@@ -109,7 +127,14 @@ export function App() {
         <Route path="settings" element={<ParentSettings />} />
       </Route>
 
-      <Route path="/faculty" element={<FacultyLayout />}>
+      <Route
+        path="/faculty"
+        element={
+          <ProtectedRoute allowedRoles={['FACULTY']}>
+            <FacultyLayout />
+          </ProtectedRoute>
+        }
+      >
         <Route index element={<RoleRedirect />} />
         <Route path="dashboard" element={<FacultyDashboard />} />
         <Route path="classes" element={<FacultyClasses />} />
@@ -127,9 +152,34 @@ export function App() {
         <Route path="settings" element={<FacultySettings />} />
       </Route>
 
-      <Route path="/admin" element={<AdminLayout />}>
+      <Route
+        path="/admin"
+        element={
+          <ProtectedRoute allowedRoles={['ADMIN', 'SUPER_ADMIN']}>
+            <AdminLayout />
+          </ProtectedRoute>
+        }
+      >
         <Route index element={<RoleRedirect />} />
         <Route path="dashboard" element={<AdminDashboard />} />
+        <Route path="users" element={<AdminUsers />} />
+        <Route path="students" element={<AdminStudents />} />
+        <Route path="parents" element={<AdminParents />} />
+        <Route path="faculty" element={<AdminFaculty />} />
+        <Route path="courses" element={<AdminCourses />} />
+        <Route path="classes" element={<AdminClasses />} />
+        <Route path="subjects" element={<AdminSubjects />} />
+        <Route path="departments" element={<AdminDepartments />} />
+        <Route path="attendance" element={<AdminAttendance />} />
+        <Route path="assignments" element={<AdminAssignments />} />
+        <Route path="exams" element={<AdminExams />} />
+        <Route path="fees" element={<AdminFees />} />
+        <Route path="announcements" element={<AdminAnnouncements />} />
+        <Route path="reports" element={<AdminReports />} />
+        <Route path="analytics" element={<AdminAnalytics />} />
+        <Route path="documents" element={<AdminDocuments />} />
+        <Route path="audit-logs" element={<AdminAuditLogs />} />
+        <Route path="settings" element={<AdminSettings />} />
       </Route>
     </Routes>
   );

@@ -16,12 +16,16 @@ export function UserMenu({ name, email, role, avatarUrl }: UserMenuProps) {
   const getProfilePath = () => {
     if (role === 'STUDENT') return '/student/profile';
     if (role === 'PARENT') return '/parent/profile';
+    if (role === 'FACULTY') return '/faculty/profile';
+    if (role === 'ADMIN' || role === 'SUPER_ADMIN') return '/admin/settings';
     return '#';
   };
 
   const getSettingsPath = () => {
     if (role === 'STUDENT') return '/student/settings';
     if (role === 'PARENT') return '/parent/settings';
+    if (role === 'FACULTY') return '/faculty/settings';
+    if (role === 'ADMIN' || role === 'SUPER_ADMIN') return '/admin/settings';
     return '#';
   };
 
