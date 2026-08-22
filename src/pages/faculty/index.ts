@@ -1,0 +1,14 @@
+export { FacultyDashboard } from './FacultyDashboard';
+export { FacultyClasses } from './FacultyClasses';
+export { FacultyStudents } from './FacultyStudents';
+export { FacultyAttendance } from './FacultyAttendance';
+export { FacultyAssignments } from './FacultyAssignments';
+export { FacultyGradebook } from './FacultyGradebook';
+export { FacultyCourses } from './FacultyCourses';
+export { FacultyMaterials } from './FacultyMaterials';
+export { FacultyAnnouncements } from './FacultyAnnouncements';
+export { FacultyMessages } from './FacultyMessages';
+export { FacultyCalendar } from './FacultyCalendar';
+export { FacultyReports } from './FacultyReports';
+export { FacultyProfile } from './FacultyProfile';
+export { FacultySettings } from './FacultySettings';

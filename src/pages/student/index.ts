@@ -1,0 +1,10 @@
+export { StudentDashboard } from './StudentDashboard';
+export { StudentCourses } from './StudentCourses';
+export { StudentAssignments } from './StudentAssignments';
+export { StudentExams } from './StudentExams';
+export { StudentAttendance } from './StudentAttendance';
+export { StudentGrades } from './StudentGrades';
+export { StudentCalendar } from './StudentCalendar';
+export { StudentMessages } from './StudentMessages';
+export { StudentProfile } from './StudentProfile';
+export { StudentSettings } from './StudentSettings';
