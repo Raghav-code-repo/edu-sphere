@@ -66,7 +66,7 @@ export function RegisterForm() {
     <div>
       <div className="mb-8 text-center">
         {/* <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Create Account</h1>
-        <p className="mt-2 text-gray-600 dark:text-gray-300">Join EduSphere today</p> */}
+        <p className="mt-2 text-gray-600 dark:text-gray-300">Join PRIMUS Olympiad today</p> */}
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">

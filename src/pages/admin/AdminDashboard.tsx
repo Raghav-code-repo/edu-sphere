@@ -130,7 +130,7 @@ export function AdminDashboard() {
     <div className="space-y-6">
       <PageHeader
         title="Admin Dashboard"
-        subtitle="EduSphere University - Complete system overview"
+        subtitle="PRIMUS University - Complete system overview"
         action={
           <Link
             to="/admin/settings"

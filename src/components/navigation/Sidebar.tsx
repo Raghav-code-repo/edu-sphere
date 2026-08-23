@@ -102,9 +102,9 @@ export function Sidebar({ navigation, collapsed, onToggle, user }: SidebarProps)
         {!collapsed && (
           <div className="flex items-center gap-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-600 text-white">
-              <span className="text-lg font-bold">E</span>
+              <span className="text-lg font-bold">P</span>
             </div>
-            <span className="text-lg font-bold text-gray-900 dark:text-white">EduSphere</span>
+            <span className="text-lg font-bold text-gray-900 dark:text-white">PRIMUS Olympiad</span>
           </div>
         )}
         {collapsed && (

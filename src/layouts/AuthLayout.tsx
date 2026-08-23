@@ -14,16 +14,19 @@ export function AuthLayout({ children, title, subtitle }: AuthLayoutProps) {
           <div>
             <div className="flex items-center gap-2">
               <GraduationCap className="h-10 w-10 text-primary-600" />
-              <span className="text-2xl font-bold text-gray-900 dark:text-white">EduSphere</span>
+              <span className="text-2xl font-bold text-gray-900 dark:text-white">
+                PRIMUS Olympiad
+              </span>
             </div>
           </div>
 
           <div className="max-w-md">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              Education Management Reimagined
+              Welcome to Optimus – Unlocking Olympiad Excellence
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-              Streamline your educational institution with our comprehensive management platform.
+              Interactive Live Discussions, AI-Powered Practice Tests, and Expert Guidance to Help
+              Students from Classes 3 to 8 Achieve Their Dreams.
             </p>
 
             <div className="grid gap-6">
@@ -66,7 +69,7 @@ export function AuthLayout({ children, title, subtitle }: AuthLayoutProps) {
           </div>
 
           <div className="text-sm text-gray-500 dark:text-gray-400">
-            © {new Date().getFullYear()} EduSphere. All rights reserved.
+            © {new Date().getFullYear()} PRIMUS Olympiad. All rights reserved.
           </div>
         </div>
 
@@ -75,7 +78,9 @@ export function AuthLayout({ children, title, subtitle }: AuthLayoutProps) {
             <div className="lg:hidden mb-8 text-center">
               <div className="flex items-center justify-center gap-2 mb-4">
                 <GraduationCap className="h-8 w-8 text-primary-600" />
-                <span className="text-xl font-bold text-gray-900 dark:text-white">EduSphere</span>
+                <span className="text-xl font-bold text-gray-900 dark:text-white">
+                  PRIMUS Olympiad
+                </span>
               </div>
             </div>
             <div className="rounded-xl border border-gray-200 bg-white p-8 shadow-sm dark:border-gray-700 dark:bg-gray-800">
