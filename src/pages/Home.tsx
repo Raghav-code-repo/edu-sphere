@@ -98,7 +98,7 @@ export function Home() {
                 {/* <p className="mt-2 text-gray-600 dark:text-gray-300">Explore Our Courses</p> */}
                 <br />
                 <h3 className="mt-4 text-lg font-semibold text-gray-900 dark:text-white">
-                  Explore Our Courses
+                  Book Your Free Demo Sesstion
                 </h3>
               </a>
               <a
@@ -109,7 +109,7 @@ export function Home() {
                 {/* <p className="mt-2 text-gray-600 dark:text-gray-300">Explore Our Courses</p> */}
                 <br />
                 <h3 className="mt-4 text-lg font-semibold text-gray-900 dark:text-white">
-                  Explore Our Courses
+                  Explore Our Faculty
                 </h3>
               </a>
             </div>
