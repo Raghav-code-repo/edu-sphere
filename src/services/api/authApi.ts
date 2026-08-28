@@ -1,4 +1,6 @@
 import type { AuthResponse } from '@/types/auth';
+import { environment } from '@/config/environment';
+import { mockAuthService } from '@/services/auth/mockAuthService';
 import { getApiClient } from './apiClient';
 
 export interface AuthApiService {
@@ -72,4 +74,45 @@ class AuthApi implements AuthApiService {
   }
 }
 
-export const authApi = new AuthApi();
+class MockAuthApi implements AuthApiService {
+  async login(credentials: {
+    email: string;
+    password: string;
+    rememberMe?: boolean;
+  }): Promise<AuthResponse> {
+    return mockAuthService.login(credentials);
+  }
+
+  async register(credentials: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+    agreeTerms: boolean;
+  }): Promise<AuthResponse> {
+    return mockAuthService.register(credentials);
+  }
+
+  async forgotPassword(credentials: { email: string }): Promise<void> {
+    return mockAuthService.forgotPassword(credentials);
+  }
+
+  async resetPassword(credentials: {
+    token: string;
+    password: string;
+    confirmPassword: string;
+  }): Promise<void> {
+    return mockAuthService.resetPassword(credentials);
+  }
+
+  async refreshToken(): Promise<AuthResponse | null> {
+    return mockAuthService.refreshToken();
+  }
+
+  async logout(): Promise<void> {
+    return mockAuthService.logout();
+  }
+}
+
+export const authApi: AuthApiService = environment.useMockApi ? new MockAuthApi() : new AuthApi();

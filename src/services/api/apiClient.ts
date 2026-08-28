@@ -46,7 +46,10 @@ export class ApiClient {
     path: string,
     options: RequestOptions = {}
   ): Promise<T> {
-    const url = new URL(`${this.baseUrl}${path}`);
+    const fullUrl = `${this.baseUrl}${path}`;
+    const url = fullUrl.startsWith('http')
+      ? new URL(fullUrl)
+      : new URL(fullUrl, window.location.origin);
 
     if (options.params) {
       for (const [key, value] of Object.entries(options.params)) {
