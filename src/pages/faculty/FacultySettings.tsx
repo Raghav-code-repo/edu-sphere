@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PageHeader } from '@/features/faculty';
-import { facultyMockService } from '@/services/mock/facultyMockService';
+import { facultyApi } from '@/services/api/facultyApi';
 import type { FacultySettings } from '@/types/faculty';
 
 export function FacultySettings() {
@@ -16,13 +16,13 @@ export function FacultySettings() {
   const [saved, setSaved] = useState(false);
 
   useEffect(() => {
-    facultyMockService.getSettings().then((data) => setSettings(data));
+    facultyApi.getSettings().then((data) => setSettings(data));
   }, []);
 
   const handleToggle = async (key: keyof FacultySettings) => {
     setSaving(true);
     setSaved(false);
-    const updated = await facultyMockService.updateSettings({ [key]: !settings[key] });
+    const updated = await facultyApi.updateSettings({ [key]: !settings[key] });
     setSettings(updated);
     setSaving(false);
     setSaved(true);
@@ -32,7 +32,7 @@ export function FacultySettings() {
   const handleChange = async (key: keyof FacultySettings, value: string) => {
     setSaving(true);
     setSaved(false);
-    const updated = await facultyMockService.updateSettings({ [key]: value });
+    const updated = await facultyApi.updateSettings({ [key]: value });
     setSettings(updated);
     setSaving(false);
     setSaved(true);

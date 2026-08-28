@@ -22,6 +22,13 @@ export function DashboardLayout({ navigation, user, breadcrumbs }: DashboardLayo
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:bg-primary-600 focus:px-4 focus:py-2 focus:text-white"
+      >
+        Skip to main content
+      </a>
+
       <Sidebar
         navigation={navigation}
         collapsed={sidebarCollapsed}
@@ -43,7 +50,7 @@ export function DashboardLayout({ navigation, user, breadcrumbs }: DashboardLayo
           breadcrumbs={breadcrumbs}
         />
 
-        <main className="p-4 lg:p-6">
+        <main id="main-content" className="p-4 lg:p-6">
           <Outlet />
         </main>
       </div>

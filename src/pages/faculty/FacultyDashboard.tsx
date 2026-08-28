@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { BookOpen, CalendarDays, ClipboardList, TrendingUp, Users } from 'lucide-react';
 import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
 import { PageHeader, KpiCard, ChartCard, QuickActions } from '@/features/faculty';
-import { facultyMockService } from '@/services/mock/facultyMockService';
+import { facultyApi } from '@/services/api/facultyApi';
 import type {
   FacultyDashboardStats,
   TodayClass,
@@ -35,13 +35,13 @@ export function FacultyDashboard() {
         analyticsData,
         trendsData,
       ] = await Promise.all([
-        facultyMockService.getDashboardStats(),
-        facultyMockService.getTodayClasses(),
-        facultyMockService.getPendingActions(),
-        facultyMockService.getSubmissions(),
-        facultyMockService.getStudentPerformance(),
-        facultyMockService.getAttendanceAnalytics(),
-        facultyMockService.getSubmissionTrends(),
+        facultyApi.getDashboardStats(),
+        facultyApi.getTodayClasses(),
+        facultyApi.getPendingActions(),
+        facultyApi.getSubmissions(),
+        facultyApi.getStudentPerformance(),
+        facultyApi.getAttendanceAnalytics(),
+        facultyApi.getSubmissionTrends(),
       ]);
 
       setStats(dashboardStats);

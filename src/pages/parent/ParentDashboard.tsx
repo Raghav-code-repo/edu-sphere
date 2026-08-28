@@ -13,7 +13,7 @@ import {
 import { BookOpen, ClipboardList, CalendarDays, TrendingUp } from 'lucide-react';
 import { PageHeader, ChildSection, ChildSwitcher } from '@/features/parent';
 import { KpiCard, AnnouncementCard, ActivityItem } from '@/features/student';
-import { parentMockService } from '@/services/mock/parentMockService';
+import { parentApi } from '@/services/api/parentApi';
 import type { Child, ParentDashboardStats } from '@/types/parent';
 
 export function ParentDashboard() {
@@ -25,8 +25,8 @@ export function ParentDashboard() {
   useEffect(() => {
     async function loadData() {
       const [childrenData, statsData] = await Promise.all([
-        parentMockService.getChildren(),
-        parentMockService.getDashboardStats(),
+        parentApi.getChildren(),
+        parentApi.getDashboardStats(),
       ]);
       setChildren(childrenData);
       setSelectedChildId(childrenData[0]?.id || '');

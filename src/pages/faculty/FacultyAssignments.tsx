@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PageHeader, KpiCard } from '@/features/faculty';
-import { facultyMockService } from '@/services/mock/facultyMockService';
+import { facultyApi } from '@/services/api/facultyApi';
 import type { Assignment, Submission, FacultyCourse } from '@/types/faculty';
 import { Search, Plus, X, Edit2, Save, Send } from 'lucide-react';
 
@@ -24,13 +24,11 @@ export function FacultyAssignments() {
   });
 
   useEffect(() => {
-    Promise.all([facultyMockService.getAssignments(), facultyMockService.getCourses()]).then(
-      ([asgns, crs]) => {
-        setAssignments(asgns);
-        setCourses(crs);
-        setLoading(false);
-      }
-    );
+    Promise.all([facultyApi.getAssignments(), facultyApi.getCourses()]).then(([asgns, crs]) => {
+      setAssignments(asgns);
+      setCourses(crs);
+      setLoading(false);
+    });
   }, []);
 
   const filtered = assignments.filter((a) => {
@@ -46,13 +44,13 @@ export function FacultyAssignments() {
 
   const openAssignment = async (assignment: Assignment) => {
     setSelectedAssignment(assignment);
-    const subs = await facultyMockService.getSubmissions(assignment.id);
+    const subs = await facultyApi.getSubmissions(assignment.id);
     setSubmissions(subs);
   };
 
   const handleReview = async () => {
     if (!reviewingSubmission) return;
-    await facultyMockService.reviewSubmission({
+    await facultyApi.reviewSubmission({
       submissionId: reviewingSubmission.id,
       grade: parseInt(reviewForm.grade, 10) || 0,
       feedback: reviewForm.feedback,
@@ -60,7 +58,7 @@ export function FacultyAssignments() {
     });
     setReviewingSubmission(null);
     if (selectedAssignment) {
-      const updated = await facultyMockService.getSubmissions(selectedAssignment.id);
+      const updated = await facultyApi.getSubmissions(selectedAssignment.id);
       setSubmissions(updated);
     }
   };

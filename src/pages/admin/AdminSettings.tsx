@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PageHeader } from '@/features/admin';
-import { adminMockService } from '@/services/mock/adminMockService';
+import { adminApi } from '@/services/api/adminApi';
 import type { AdminSettings } from '@/types/admin';
 import { Save, CheckCircle } from 'lucide-react';
 
@@ -13,7 +13,7 @@ export function AdminSettings() {
   useEffect(() => {
     async function loadSettings() {
       setLoading(true);
-      const data = await adminMockService.getSettings();
+      const data = await adminApi.getSettings();
       setSettings(data);
       setLoading(false);
     }
@@ -23,7 +23,7 @@ export function AdminSettings() {
   const handleSave = async () => {
     if (!settings) return;
     setSaving(true);
-    await adminMockService.updateSettings(settings);
+    await adminApi.updateSettings(settings);
     setSaving(false);
     setSuccess(true);
     setTimeout(() => setSuccess(false), 3000);

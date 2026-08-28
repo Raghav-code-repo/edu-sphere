@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { User, Mail, Phone, MapPin, Users } from 'lucide-react';
 import { PageHeader } from '@/features/parent';
-import { parentMockService } from '@/services/mock/parentMockService';
+import { parentApi } from '@/services/api/parentApi';
 import type { ParentProfile, Child } from '@/types/parent';
 
 export function ParentChildren() {
@@ -10,7 +10,7 @@ export function ParentChildren() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    parentMockService.getParentProfile().then((data) => {
+    parentApi.getParentProfile().then((data) => {
       setProfile(data);
       setLoading(false);
     });

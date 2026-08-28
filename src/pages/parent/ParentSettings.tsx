@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PageHeader } from '@/features/parent';
-import { parentMockService } from '@/services/mock/parentMockService';
+import { parentApi } from '@/services/api/parentApi';
 import type { ParentSettings } from '@/types/parent';
 
 export function ParentSettings() {
@@ -14,13 +14,13 @@ export function ParentSettings() {
   const [saved, setSaved] = useState(false);
 
   useEffect(() => {
-    parentMockService.getSettings().then((data) => setSettings(data));
+    parentApi.getSettings().then((data) => setSettings(data));
   }, []);
 
   const handleToggle = async (key: keyof ParentSettings) => {
     setSaving(true);
     setSaved(false);
-    const updated = await parentMockService.updateSettings({ [key]: !settings[key] });
+    const updated = await parentApi.updateSettings({ [key]: !settings[key] });
     setSettings(updated);
     setSaving(false);
     setSaved(true);
@@ -30,7 +30,7 @@ export function ParentSettings() {
   const handleChange = async (key: keyof ParentSettings, value: string) => {
     setSaving(true);
     setSaved(false);
-    const updated = await parentMockService.updateSettings({ [key]: value });
+    const updated = await parentApi.updateSettings({ [key]: value });
     setSettings(updated);
     setSaving(false);
     setSaved(true);

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Search, Filter } from 'lucide-react';
 import { PageHeader, CourseCard, EmptyState } from '@/features/student';
-import { studentMockService } from '@/services/mock/studentMockService';
+import { studentApi } from '@/services/api/studentApi';
 import type { Course } from '@/types/student';
 
 export function StudentCourses() {
@@ -10,7 +10,7 @@ export function StudentCourses() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    studentMockService.getCourses().then((data) => {
+    studentApi.getCourses().then((data) => {
       setCourses(data);
       setLoading(false);
     });

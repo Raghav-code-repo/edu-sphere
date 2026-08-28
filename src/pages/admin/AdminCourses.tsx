@@ -12,7 +12,7 @@ import {
   XCircle,
 } from 'lucide-react';
 import { PageHeader, DataTable, Drawer, FilterPanel, StatusBadge } from '@/features/admin';
-import { adminMockService } from '@/services/mock/adminMockService';
+import { adminApi } from '@/services/api/adminApi';
 import type { AdminCourse, FilterOptions } from '@/types/admin';
 
 export function AdminCourses() {
@@ -42,7 +42,7 @@ export function AdminCourses() {
   useEffect(() => {
     async function loadData() {
       setLoading(true);
-      const response = await adminMockService.getCourses(filters);
+      const response = await adminApi.getCourses(filters);
       setCourses(response.data);
       setTotalPages(response.totalPages);
       setTotal(response.total);
@@ -62,7 +62,7 @@ export function AdminCourses() {
   };
 
   const handleView = async (course: AdminCourse) => {
-    const fullCourse = await adminMockService.getCourse(course.id);
+    const fullCourse = await adminApi.getCourse(course.id);
     if (fullCourse) {
       setSelectedCourse(fullCourse);
       setDrawerOpen(true);
@@ -75,8 +75,8 @@ export function AdminCourses() {
   };
 
   const handleDelete = async (course: AdminCourse) => {
-    await adminMockService.deleteCourse(course.id);
-    const response = await adminMockService.getCourses(filters);
+    await adminApi.deleteCourse(course.id);
+    const response = await adminApi.getCourses(filters);
     setCourses(response.data);
     setTotalPages(response.totalPages);
     setTotal(response.total);
@@ -85,11 +85,11 @@ export function AdminCourses() {
 
   const handlePublishToggle = async (course: AdminCourse) => {
     if (course.status === 'published') {
-      await adminMockService.unpublishCourse(course.id);
+      await adminApi.unpublishCourse(course.id);
     } else {
-      await adminMockService.publishCourse(course.id);
+      await adminApi.publishCourse(course.id);
     }
-    const response = await adminMockService.getCourses(filters);
+    const response = await adminApi.getCourses(filters);
     setCourses(response.data);
     setTotalPages(response.totalPages);
     setTotal(response.total);

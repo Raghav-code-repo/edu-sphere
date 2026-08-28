@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PageHeader } from '@/features/parent';
-import { parentMockService } from '@/services/mock/parentMockService';
+import { parentApi } from '@/services/api/parentApi';
 import type { ParentProfile } from '@/types/parent';
 
 export function ParentProfile() {
@@ -8,7 +8,7 @@ export function ParentProfile() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    parentMockService.getParentProfile().then((data) => {
+    parentApi.getParentProfile().then((data) => {
       setProfile(data);
       setLoading(false);
     });

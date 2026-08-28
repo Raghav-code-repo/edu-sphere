@@ -12,7 +12,7 @@ import {
   Activity,
 } from 'lucide-react';
 import { PageHeader, DataTable, Drawer, FilterPanel, StatusBadge } from '@/features/admin';
-import { adminMockService } from '@/services/mock/adminMockService';
+import { adminApi } from '@/services/api/adminApi';
 import type { AdminFaculty, FilterOptions } from '@/types/admin';
 
 export function AdminFaculty() {
@@ -44,7 +44,7 @@ export function AdminFaculty() {
   useEffect(() => {
     async function loadData() {
       setLoading(true);
-      const response = await adminMockService.getFaculty(filters);
+      const response = await adminApi.getFaculty(filters);
       setFaculty(response.data);
       setTotalPages(response.totalPages);
       setTotal(response.total);
@@ -67,19 +67,19 @@ export function AdminFaculty() {
     if (!bulkAction || selectedRows.length === 0) return;
     for (const id of selectedRows) {
       if (bulkAction === 'delete') {
-        await adminMockService.deleteUser(id);
+        await adminApi.deleteUser(id);
       }
     }
     setSelectedRows([]);
     setBulkAction('');
-    const response = await adminMockService.getFaculty(filters);
+    const response = await adminApi.getFaculty(filters);
     setFaculty(response.data);
     setTotalPages(response.totalPages);
     setTotal(response.total);
   };
 
   const handleView = async (facultyMember: AdminFaculty) => {
-    const fullFaculty = await adminMockService.getFacultyMember(facultyMember.id);
+    const fullFaculty = await adminApi.getFacultyMember(facultyMember.id);
     if (fullFaculty) {
       setSelectedFacultyMember(fullFaculty);
       setDrawerOpen(true);
@@ -92,8 +92,8 @@ export function AdminFaculty() {
   };
 
   const handleDelete = async (facultyMember: AdminFaculty) => {
-    await adminMockService.deleteUser(facultyMember.id);
-    const response = await adminMockService.getFaculty(filters);
+    await adminApi.deleteUser(facultyMember.id);
+    const response = await adminApi.getFaculty(filters);
     setFaculty(response.data);
     setTotalPages(response.totalPages);
     setTotal(response.total);

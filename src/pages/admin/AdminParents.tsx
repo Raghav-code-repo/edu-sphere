@@ -12,7 +12,7 @@ import {
   Activity,
 } from 'lucide-react';
 import { PageHeader, DataTable, Drawer, FilterPanel, StatusBadge } from '@/features/admin';
-import { adminMockService } from '@/services/mock/adminMockService';
+import { adminApi } from '@/services/api/adminApi';
 import type { AdminParent, FilterOptions } from '@/types/admin';
 
 export function AdminParents() {
@@ -44,7 +44,7 @@ export function AdminParents() {
   useEffect(() => {
     async function loadData() {
       setLoading(true);
-      const response = await adminMockService.getParents(filters);
+      const response = await adminApi.getParents(filters);
       setParents(response.data);
       setTotalPages(response.totalPages);
       setTotal(response.total);
@@ -67,19 +67,19 @@ export function AdminParents() {
     if (!bulkAction || selectedRows.length === 0) return;
     for (const id of selectedRows) {
       if (bulkAction === 'delete') {
-        await adminMockService.deleteUser(id);
+        await adminApi.deleteUser(id);
       }
     }
     setSelectedRows([]);
     setBulkAction('');
-    const response = await adminMockService.getParents(filters);
+    const response = await adminApi.getParents(filters);
     setParents(response.data);
     setTotalPages(response.totalPages);
     setTotal(response.total);
   };
 
   const handleView = async (parent: AdminParent) => {
-    const fullParent = await adminMockService.getParent(parent.id);
+    const fullParent = await adminApi.getParent(parent.id);
     if (fullParent) {
       setSelectedParent(fullParent);
       setDrawerOpen(true);
@@ -92,8 +92,8 @@ export function AdminParents() {
   };
 
   const handleDelete = async (parent: AdminParent) => {
-    await adminMockService.deleteUser(parent.id);
-    const response = await adminMockService.getParents(filters);
+    await adminApi.deleteUser(parent.id);
+    const response = await adminApi.getParents(filters);
     setParents(response.data);
     setTotalPages(response.totalPages);
     setTotal(response.total);

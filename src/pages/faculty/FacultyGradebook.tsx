@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from 'react';
 import { PageHeader, KpiCard, ChartCard } from '@/features/faculty';
-import { facultyMockService } from '@/services/mock/facultyMockService';
+import { facultyApi } from '@/services/api/facultyApi';
 import type { GradeBookStudent } from '@/types/faculty';
 import {
   Search,
@@ -42,7 +42,7 @@ export function FacultyGradebook() {
   const perPage = 10;
 
   useEffect(() => {
-    facultyMockService.getGradebook().then((data) => {
+    facultyApi.getGradebook().then((data) => {
       setStudents(data);
       setLoading(false);
     });
@@ -108,7 +108,7 @@ export function FacultyGradebook() {
     const numValue = parseFloat(editValue);
     if (isNaN(numValue)) return;
 
-    await facultyMockService.updateGradebook(studentId, {
+    await facultyApi.updateGradebook(studentId, {
       [field]: numValue,
     });
 

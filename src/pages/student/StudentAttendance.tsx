@@ -11,7 +11,7 @@ import {
   BarChart,
   Bar,
 } from 'recharts';
-import { studentMockService } from '@/services/mock/studentMockService';
+import { studentApi } from '@/services/api/studentApi';
 import type { AttendanceRecord } from '@/types/student';
 
 const monthlyAttendanceData = [
@@ -29,7 +29,7 @@ export function StudentAttendance() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    studentMockService.getAttendance().then((data) => {
+    studentApi.getAttendance().then((data) => {
       setRecords(data);
       setLoading(false);
     });

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PageHeader, ChildSwitcher, EmptyState } from '@/features/parent';
-import { parentMockService } from '@/services/mock/parentMockService';
+import { parentApi } from '@/services/api/parentApi';
 import type { Child, ParentAssignment } from '@/types/parent';
 
 export function ParentAssignments() {
@@ -12,8 +12,8 @@ export function ParentAssignments() {
   useEffect(() => {
     async function loadData() {
       const [childrenData, assignmentsData] = await Promise.all([
-        parentMockService.getChildren(),
-        parentMockService.getAssignments(),
+        parentApi.getChildren(),
+        parentApi.getAssignments(),
       ]);
       setChildren(childrenData);
       setSelectedChildId(childrenData[0]?.id || '');

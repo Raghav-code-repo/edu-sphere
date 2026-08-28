@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PageHeader, DataTable, Drawer, FilterPanel, StatusBadge } from '@/features/admin';
-import { adminMockService } from '@/services/mock/adminMockService';
+import { adminApi } from '@/services/api/adminApi';
 import type { AdminFee, FilterOptions } from '@/types/admin';
 import { MoreVertical, Plus, ChevronLeft, ChevronRight, Filter, Eye, Edit2 } from 'lucide-react';
 
@@ -32,7 +32,7 @@ export function AdminFees() {
   useEffect(() => {
     async function loadData() {
       setLoading(true);
-      const response = await adminMockService.getFees(filters);
+      const response = await adminApi.getFees(filters);
       setFees(response.data);
       setTotalPages(response.totalPages);
       setTotal(response.total);
@@ -48,8 +48,8 @@ export function AdminFees() {
   };
 
   const handleStatusChange = async (id: string, status: string) => {
-    await adminMockService.updateFeeStatus(id, status);
-    const response = await adminMockService.getFees(filters);
+    await adminApi.updateFeeStatus(id, status);
+    const response = await adminApi.getFees(filters);
     setFees(response.data);
     setActionMenu(null);
   };

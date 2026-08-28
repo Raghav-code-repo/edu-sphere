@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Plus, ChevronLeft, ChevronRight, Filter, Eye, Edit2, Trash2 } from 'lucide-react';
 import { PageHeader, DataTable, Drawer, FilterPanel } from '@/features/admin';
-import { adminMockService } from '@/services/mock/adminMockService';
+import { adminApi } from '@/services/api/adminApi';
 import type { AdminClass, FilterOptions } from '@/types/admin';
 
 export function AdminClasses() {
@@ -32,7 +32,7 @@ export function AdminClasses() {
   useEffect(() => {
     async function loadData() {
       setLoading(true);
-      const response = await adminMockService.getClasses(filters);
+      const response = await adminApi.getClasses(filters);
       setClasses(response.data);
       setTotalPages(response.totalPages);
       setTotal(response.total);
@@ -52,7 +52,7 @@ export function AdminClasses() {
   };
 
   const handleView = async (cls: AdminClass) => {
-    const fullClass = await adminMockService.getClass(cls.id);
+    const fullClass = await adminApi.getClass(cls.id);
     if (fullClass) {
       setSelectedClass(fullClass);
       setDrawerOpen(true);
@@ -65,8 +65,8 @@ export function AdminClasses() {
   };
 
   const handleDelete = async (cls: AdminClass) => {
-    await adminMockService.deleteClass(cls.id);
-    const response = await adminMockService.getClasses(filters);
+    await adminApi.deleteClass(cls.id);
+    const response = await adminApi.getClasses(filters);
     setClasses(response.data);
     setTotalPages(response.totalPages);
     setTotal(response.total);

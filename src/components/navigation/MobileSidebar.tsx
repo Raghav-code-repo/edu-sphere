@@ -24,6 +24,9 @@ export function MobileSidebar({ navigation, open, onClose, user }: MobileSidebar
         onClick={onClose}
       />
       <aside
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobile navigation menu"
         className={`fixed inset-y-0 left-0 z-50 w-64 transform border-r border-gray-200 bg-white transition-transform duration-300 dark:border-gray-700 dark:bg-gray-800 md:hidden ${
           open ? 'translate-x-0' : '-translate-x-full'
         }`}

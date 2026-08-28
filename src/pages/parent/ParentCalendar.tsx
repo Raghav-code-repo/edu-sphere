@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PageHeader, ChildSwitcher, EmptyState } from '@/features/parent';
-import { parentMockService } from '@/services/mock/parentMockService';
+import { parentApi } from '@/services/api/parentApi';
 import type { Child, ParentCalendarEvent } from '@/types/parent';
 import { Calendar } from '@/components';
 
@@ -14,8 +14,8 @@ export function ParentCalendar() {
   useEffect(() => {
     async function loadData() {
       const [childrenData, eventsData] = await Promise.all([
-        parentMockService.getChildren(),
-        parentMockService.getCalendarEvents(),
+        parentApi.getChildren(),
+        parentApi.getCalendarEvents(),
       ]);
       setChildren(childrenData);
       setSelectedChildId(childrenData[0]?.id || '');

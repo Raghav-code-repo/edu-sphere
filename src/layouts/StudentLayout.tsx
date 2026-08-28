@@ -1,12 +1,16 @@
 import { DashboardLayout } from './DashboardLayout';
 import { studentNavigation } from '@/config/navigation';
-
-const defaultUser = {
-  name: 'Rahul Sharma',
-  email: 'rahul@edusphere.demo',
-  role: 'STUDENT',
-};
+import { useAuth } from '@/features/auth';
 
 export function StudentLayout() {
-  return <DashboardLayout navigation={studentNavigation} user={defaultUser} breadcrumbs={[]} />;
+  const { user } = useAuth();
+  const layoutUser = user
+    ? {
+        name: `${user.firstName} ${user.lastName}`,
+        email: user.email,
+        role: user.role,
+        avatarUrl: user.avatarUrl,
+      }
+    : { name: '', email: '', role: 'STUDENT' as const };
+  return <DashboardLayout navigation={studentNavigation} user={layoutUser} breadcrumbs={[]} />;
 }

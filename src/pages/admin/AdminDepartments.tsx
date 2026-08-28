@@ -12,7 +12,7 @@ import {
   BookOpen,
 } from 'lucide-react';
 import { PageHeader, DataTable, Drawer } from '@/features/admin';
-import { adminMockService } from '@/services/mock/adminMockService';
+import { adminApi } from '@/services/api/adminApi';
 import type { AdminDepartment } from '@/types/admin';
 
 export function AdminDepartments() {
@@ -27,7 +27,7 @@ export function AdminDepartments() {
   useEffect(() => {
     async function loadData() {
       setLoading(true);
-      const data = await adminMockService.getDepartments();
+      const data = await adminApi.getDepartments();
       setDepartments(data);
       setLoading(false);
     }
@@ -35,7 +35,7 @@ export function AdminDepartments() {
   }, []);
 
   const handleView = async (department: AdminDepartment) => {
-    const fullDepartment = await adminMockService.getDepartment(department.id);
+    const fullDepartment = await adminApi.getDepartment(department.id);
     if (fullDepartment) {
       setSelectedDepartment(fullDepartment);
       setDrawerOpen(true);
@@ -48,8 +48,8 @@ export function AdminDepartments() {
   };
 
   const handleDelete = async (department: AdminDepartment) => {
-    await adminMockService.deleteDepartment(department.id);
-    const data = await adminMockService.getDepartments();
+    await adminApi.deleteDepartment(department.id);
+    const data = await adminApi.getDepartments();
     setDepartments(data);
     setActionMenu(null);
   };

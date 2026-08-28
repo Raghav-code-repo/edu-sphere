@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PageHeader, ChildSwitcher, FeeCard, PaymentForm, EmptyState } from '@/features/parent';
-import { parentMockService } from '@/services/mock/parentMockService';
+import { parentApi } from '@/services/api/parentApi';
 import type { Child, FeeRecord, PaymentIntent } from '@/types/parent';
 
 export function ParentFees() {
@@ -14,8 +14,8 @@ export function ParentFees() {
   useEffect(() => {
     async function loadData() {
       const [childrenData, feesData] = await Promise.all([
-        parentMockService.getChildren(),
-        parentMockService.getFees(),
+        parentApi.getChildren(),
+        parentApi.getFees(),
       ]);
       setChildren(childrenData);
       setSelectedChildId(childrenData[0]?.id || '');
@@ -33,7 +33,7 @@ export function ParentFees() {
   const handlePayNow = async (_feeId: string) => {
     setIsProcessing(true);
     try {
-      const intent = await parentMockService.initiatePayment(1000, selectedChildId);
+      const intent = await parentApi.initiatePayment(1000, selectedChildId);
       setPaymentIntent(intent);
     } finally {
       setIsProcessing(false);

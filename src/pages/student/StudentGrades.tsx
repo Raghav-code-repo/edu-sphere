@@ -8,7 +8,7 @@ import {
   Radar,
   ResponsiveContainer,
 } from 'recharts';
-import { studentMockService } from '@/services/mock/studentMockService';
+import { studentApi } from '@/services/api/studentApi';
 import type { GradeRecord } from '@/types/student';
 
 export function StudentGrades() {
@@ -16,7 +16,7 @@ export function StudentGrades() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    studentMockService.getGrades().then((data) => {
+    studentApi.getGrades().then((data) => {
       setGrades(data);
       setLoading(false);
     });

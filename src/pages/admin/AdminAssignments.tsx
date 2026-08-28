@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PageHeader, DataTable, Drawer, FilterPanel, StatusBadge } from '@/features/admin';
-import { adminMockService } from '@/services/mock/adminMockService';
+import { adminApi } from '@/services/api/adminApi';
 import type { AdminAssignment, FilterOptions } from '@/types/admin';
 import {
   MoreVertical,
@@ -41,7 +41,7 @@ export function AdminAssignments() {
   useEffect(() => {
     async function loadData() {
       setLoading(true);
-      const response = await adminMockService.getAssignments(filters);
+      const response = await adminApi.getAssignments(filters);
       setAssignments(response.data);
       setTotalPages(response.totalPages);
       setTotal(response.total);
@@ -57,8 +57,8 @@ export function AdminAssignments() {
   };
 
   const handleDelete = async (id: string) => {
-    await adminMockService.deleteAssignment(id);
-    const response = await adminMockService.getAssignments(filters);
+    await adminApi.deleteAssignment(id);
+    const response = await adminApi.getAssignments(filters);
     setAssignments(response.data);
     setTotalPages(response.totalPages);
     setTotal(response.total);

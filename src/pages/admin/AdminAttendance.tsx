@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PageHeader, DataTable, FilterPanel, StatusBadge } from '@/features/admin';
-import { adminMockService } from '@/services/mock/adminMockService';
+import { adminApi } from '@/services/api/adminApi';
 import type { AdminAttendanceRecord, FilterOptions } from '@/types/admin';
 import { Calendar, CheckCircle, XCircle, Clock, TrendingUp } from 'lucide-react';
 
@@ -29,8 +29,8 @@ export function AdminAttendance() {
     async function loadData() {
       setLoading(true);
       const [recordsResponse, statsData] = await Promise.all([
-        adminMockService.getAttendanceRecords(filters),
-        adminMockService.getAttendanceStats(),
+        adminApi.getAttendanceRecords(filters),
+        adminApi.getAttendanceStats(),
       ]);
       setRecords(recordsResponse.data);
       setStats(statsData);

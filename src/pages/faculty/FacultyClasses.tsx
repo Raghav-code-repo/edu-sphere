@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BookOpen, Users, Clock } from 'lucide-react';
 import { PageHeader, EmptyState } from '@/features/faculty';
-import { facultyMockService } from '@/services/mock/facultyMockService';
+import { facultyApi } from '@/services/api/facultyApi';
 import type { FacultyClass } from '@/types/faculty';
 
 export function FacultyClasses() {
@@ -10,7 +10,7 @@ export function FacultyClasses() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    facultyMockService.getClasses().then((data) => {
+    facultyApi.getClasses().then((data) => {
       setClasses(data);
       setLoading(false);
     });

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Search, Mail, MailOpen, Trash2, Send } from 'lucide-react';
 import { PageHeader } from '@/features/faculty';
-import { facultyMockService } from '@/services/mock/facultyMockService';
+import { facultyApi } from '@/services/api/facultyApi';
 import type { FacultyMessage } from '@/types/faculty';
 
 export function FacultyMessages() {
@@ -15,7 +15,7 @@ export function FacultyMessages() {
   const [compose, setCompose] = useState({ to: '', subject: '', body: '' });
 
   useEffect(() => {
-    facultyMockService.getMessages().then((data) => {
+    facultyApi.getMessages().then((data) => {
       setMessages(data);
       setLoading(false);
     });
@@ -35,7 +35,7 @@ export function FacultyMessages() {
 
   const handleSend = async () => {
     if (!compose.to || !compose.subject || !compose.body) return;
-    await facultyMockService.sendMessage({
+    await facultyApi.sendMessage({
       senderId: 'f1',
       senderName: 'Dr. Sarah Johnson',
       senderRole: 'Faculty',
@@ -46,7 +46,7 @@ export function FacultyMessages() {
     });
     setShowCompose(false);
     setCompose({ to: '', subject: '', body: '' });
-    const updated = await facultyMockService.getMessages();
+    const updated = await facultyApi.getMessages();
     setMessages(updated);
   };
 

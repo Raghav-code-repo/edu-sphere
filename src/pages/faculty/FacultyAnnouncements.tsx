@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Plus, Megaphone, X, Tag, Search } from 'lucide-react';
 import { PageHeader, EmptyState } from '@/features/faculty';
-import { facultyMockService } from '@/services/mock/facultyMockService';
+import { facultyApi } from '@/services/api/facultyApi';
 import type { Announcement } from '@/types/faculty';
 
 export function FacultyAnnouncements() {
@@ -18,7 +18,7 @@ export function FacultyAnnouncements() {
   });
 
   useEffect(() => {
-    facultyMockService.getAnnouncements().then((data) => {
+    facultyApi.getAnnouncements().then((data) => {
       setAnnouncements(data);
       setLoading(false);
     });
@@ -33,7 +33,7 @@ export function FacultyAnnouncements() {
   const handleCreate = async () => {
     if (!form.title || !form.content) return;
     const audienceArr = form.audience ? form.audience.split(',').map((s) => s.trim()) : ['all'];
-    await facultyMockService.createAnnouncement({
+    await facultyApi.createAnnouncement({
       title: form.title,
       content: form.content,
       author: 'Dr. Sarah Johnson',
@@ -42,7 +42,7 @@ export function FacultyAnnouncements() {
     });
     setShowForm(false);
     setForm({ title: '', content: '', audience: '', important: false });
-    const updated = await facultyMockService.getAnnouncements();
+    const updated = await facultyApi.getAnnouncements();
     setAnnouncements(updated);
   };
 

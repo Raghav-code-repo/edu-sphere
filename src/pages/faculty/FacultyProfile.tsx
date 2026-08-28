@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PageHeader } from '@/features/faculty';
-import { facultyMockService } from '@/services/mock/facultyMockService';
+import { facultyApi } from '@/services/api/facultyApi';
 import type { FacultyProfile } from '@/types/faculty';
 import {
   Mail,
@@ -21,7 +21,7 @@ export function FacultyProfile() {
   const [formData, setFormData] = useState<FacultyProfile | null>(null);
 
   useEffect(() => {
-    facultyMockService.getProfile().then((data) => {
+    facultyApi.getProfile().then((data) => {
       setProfile(data);
       setFormData(data);
       setLoading(false);

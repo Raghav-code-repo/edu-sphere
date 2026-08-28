@@ -46,6 +46,11 @@ export const studentNavigation: NavigationConfig = {
       badge: 5,
     },
     {
+      title: 'Notifications',
+      href: '/student/notifications',
+      icon: 'bell',
+    },
+    {
       title: 'Profile',
       href: '/student/profile',
       icon: 'user',
@@ -107,6 +112,11 @@ export const parentNavigation: NavigationConfig = {
       title: 'Calendar',
       href: '/parent/calendar',
       icon: 'calendar',
+    },
+    {
+      title: 'Notifications',
+      href: '/parent/notifications',
+      icon: 'bell',
     },
     {
       title: 'Documents',
@@ -187,6 +197,11 @@ export const facultyNavigation: NavigationConfig = {
       icon: 'calendar',
     },
     {
+      title: 'Notifications',
+      href: '/faculty/notifications',
+      icon: 'bell',
+    },
+    {
       title: 'Reports',
       href: '/faculty/reports',
       icon: 'trendingUp',
@@ -221,6 +236,7 @@ export const adminNavigation: NavigationConfig = {
     { title: 'Examinations', href: '/admin/exams', icon: 'fileCheck' },
     { title: 'Fees Management', href: '/admin/fees', icon: 'creditCard' },
     { title: 'Announcements', href: '/admin/announcements', icon: 'megaphone' },
+    { title: 'Notifications', href: '/admin/notifications', icon: 'bell' },
     { title: 'Reports', href: '/admin/reports', icon: 'barChart3' },
     { title: 'Analytics', href: '/admin/analytics', icon: 'trendingUp' },
     { title: 'Documents', href: '/admin/documents', icon: 'folderOpen' },

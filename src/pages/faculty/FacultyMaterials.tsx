@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Search, Plus, FileText, Play, Presentation, BookOpen, Paperclip } from 'lucide-react';
 import { PageHeader, EmptyState } from '@/features/faculty';
-import { facultyMockService } from '@/services/mock/facultyMockService';
+import { facultyApi } from '@/services/api/facultyApi';
 import type { CourseMaterial, FacultyCourse } from '@/types/faculty';
 
 type MaterialType = 'all' | 'pdf' | 'video' | 'presentation' | 'assignment' | 'other';
@@ -23,13 +23,11 @@ export function FacultyMaterials() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Promise.all([facultyMockService.getMaterials(), facultyMockService.getCourses()]).then(
-      ([mats, crs]) => {
-        setMaterials(mats);
-        setCourses(crs);
-        setLoading(false);
-      }
-    );
+    Promise.all([facultyApi.getMaterials(), facultyApi.getCourses()]).then(([mats, crs]) => {
+      setMaterials(mats);
+      setCourses(crs);
+      setLoading(false);
+    });
   }, []);
 
   const filtered = materials.filter((m) => {

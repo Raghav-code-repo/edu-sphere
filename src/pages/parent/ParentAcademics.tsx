@@ -8,7 +8,7 @@ import {
   Radar,
   ResponsiveContainer,
 } from 'recharts';
-import { parentMockService } from '@/services/mock/parentMockService';
+import { parentApi } from '@/services/api/parentApi';
 import type { Child, ChildAcademicSummary } from '@/types/parent';
 
 export function ParentAcademics() {
@@ -20,8 +20,8 @@ export function ParentAcademics() {
   useEffect(() => {
     async function loadData() {
       const [childrenData, summariesData] = await Promise.all([
-        parentMockService.getChildren(),
-        parentMockService.getChildAcademicSummary(),
+        parentApi.getChildren(),
+        parentApi.getChildAcademicSummary(),
       ]);
       setChildren(childrenData);
       setSelectedChildId(childrenData[0]?.id || '');

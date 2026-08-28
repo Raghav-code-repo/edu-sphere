@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PageHeader } from '@/features/student';
-import { studentMockService } from '@/services/mock/studentMockService';
+import { studentApi } from '@/services/api/studentApi';
 import type { StudentProfile } from '@/types/student';
 import { ProfileSection } from '@/features/student';
 
@@ -9,7 +9,7 @@ export function StudentProfile() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    studentMockService.getProfile().then((data) => {
+    studentApi.getProfile().then((data) => {
       setProfile(data);
       setLoading(false);
     });

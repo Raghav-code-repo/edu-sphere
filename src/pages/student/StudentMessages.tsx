@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Search, MailOpen, Trash2 } from 'lucide-react';
 import { PageHeader, MessageCard } from '@/features/student';
-import { studentMockService } from '@/services/mock/studentMockService';
+import { studentApi } from '@/services/api/studentApi';
 import type { Message } from '@/types/student';
 
 export function StudentMessages() {
@@ -11,7 +11,7 @@ export function StudentMessages() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    studentMockService.getMessages().then((data) => {
+    studentApi.getMessages().then((data) => {
       setMessages(data);
       setLoading(false);
     });

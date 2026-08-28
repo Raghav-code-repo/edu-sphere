@@ -3,6 +3,7 @@ import { ThemeSwitcher } from '@/components/navigation/ThemeSwitcher';
 import { NotificationButton } from '@/components/navigation/NotificationButton';
 import { UserMenu } from '@/components/navigation/UserMenu';
 import { Breadcrumbs } from '@/components/navigation/Breadcrumbs';
+import { CommandPalette } from '@/features/shared';
 
 interface TopHeaderProps {
   onMenuClick: () => void;
@@ -51,6 +52,8 @@ export function TopHeader({ onMenuClick, user, breadcrumbs }: TopHeaderProps) {
         </div>
         <UserMenu {...user} />
       </div>
+
+      <CommandPalette />
     </header>
   );
 }

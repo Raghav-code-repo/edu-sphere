@@ -22,7 +22,7 @@ import {
   ActivityItem,
   ScheduleItem,
 } from '@/features/student';
-import { studentMockService } from '@/services/mock/studentMockService';
+import { studentApi } from '@/services/api/studentApi';
 import type {
   Course,
   Assignment,
@@ -70,13 +70,13 @@ export function StudentDashboard() {
         activitiesData,
         scheduleData,
       ] = await Promise.all([
-        studentMockService.getDashboardStats(),
-        studentMockService.getCourses(),
-        studentMockService.getAssignments(),
-        studentMockService.getExams(),
-        studentMockService.getAnnouncements(),
-        studentMockService.getActivityLog(),
-        studentMockService.getCalendarEvents(),
+        studentApi.getDashboardStats(),
+        studentApi.getCourses(),
+        studentApi.getAssignments(),
+        studentApi.getExams(),
+        studentApi.getAnnouncements(),
+        studentApi.getActivityLog(),
+        studentApi.getCalendarEvents(),
       ]);
 
       setStats(dashboardStats);

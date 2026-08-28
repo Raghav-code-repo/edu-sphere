@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Search, Users, Calendar, GraduationCap } from 'lucide-react';
 import { PageHeader, EmptyState } from '@/features/faculty';
-import { facultyMockService } from '@/services/mock/facultyMockService';
+import { facultyApi } from '@/services/api/facultyApi';
 import type { FacultyCourse } from '@/types/faculty';
 
 export function FacultyCourses() {
@@ -11,7 +11,7 @@ export function FacultyCourses() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    facultyMockService.getCourses().then((data) => {
+    facultyApi.getCourses().then((data) => {
       setCourses(data);
       setLoading(false);
     });

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Download, Filter, RefreshCw } from 'lucide-react';
 import { PageHeader, DataTable, FilterPanel } from '@/features/admin';
-import { adminMockService } from '@/services/mock/adminMockService';
+import { adminApi } from '@/services/api/adminApi';
 import type { AdminReport } from '@/types/admin';
 import {
   LineChart,
@@ -78,7 +78,7 @@ export function AdminReports() {
   useEffect(() => {
     async function loadReports() {
       setLoading(true);
-      const data = await adminMockService.getReports();
+      const data = await adminApi.getReports();
       setReports(data);
       setLoading(false);
     }
@@ -87,7 +87,7 @@ export function AdminReports() {
 
   const handleGenerate = async () => {
     setGenerating(true);
-    const report = await adminMockService.generateReport(reportType, {
+    const report = await adminApi.generateReport(reportType, {
       dateFrom,
       dateTo,
     });

@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { AuthContext } from './AuthContext';
 import type { User, UserRole } from '@/types/auth';
-import { mockAuthService } from '@/services/auth/mockAuthService';
+import { authApi } from '@/services/api/authApi';
+import { getApiClient } from '@/services/api/apiClient';
 import type { AuthContextValue } from '@/types/auth';
 
 export { useAuth } from './AuthContext';
@@ -16,21 +17,21 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [isLoading, setIsLoading] = useState(true);
 
   const refreshAuth = useCallback(async () => {
-    console.log('[Dev] refreshAuth called');
     try {
-      const response = await mockAuthService.refreshToken();
-      console.log('[Dev] refreshAuth response', response);
+      const response = await authApi.refreshToken();
       if (response) {
         setState(response.user);
         setToken(response.token);
+        getApiClient().setAuthToken(response.token);
       } else {
-        console.log('[Dev] No auth session found');
         setState(null);
         setToken(null);
+        getApiClient().setAuthToken(null);
       }
     } catch {
       setState(null);
       setToken(null);
+      getApiClient().setAuthToken(null);
     } finally {
       setIsLoading(false);
     }
@@ -46,15 +47,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
       password: string;
       rememberMe?: boolean;
     }): Promise<User> => {
-      console.log('[Dev] AuthProvider.login called', { email: credentials.email });
       setIsLoading(true);
       try {
-        const response = await mockAuthService.login(credentials);
-        console.log('[Dev] Mock auth response', response);
-        console.log('[Dev] Authenticated user', response.user);
-        console.log('[Dev] Authenticated role', response.user.role);
+        const response = await authApi.login(credentials);
         setState(response.user);
         setToken(response.token);
+        getApiClient().setAuthToken(response.token);
         return response.user;
       } finally {
         setIsLoading(false);
@@ -74,9 +72,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }) => {
       setIsLoading(true);
       try {
-        const response = await mockAuthService.register(credentials);
+        const response = await authApi.register(credentials);
         setState(response.user);
         setToken(response.token);
+        getApiClient().setAuthToken(response.token);
       } finally {
         setIsLoading(false);
       }
@@ -85,12 +84,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
   );
 
   const forgotPassword = useCallback(async (_email: string) => {
-    await mockAuthService.forgotPassword({ email: _email });
+    await authApi.forgotPassword({ email: _email });
   }, []);
 
   const resetPassword = useCallback(
     async (_token: string, _password: string, _confirmPassword: string) => {
-      await mockAuthService.resetPassword({
+      await authApi.resetPassword({
         token: _token,
         password: _password,
         confirmPassword: _confirmPassword,
@@ -102,9 +101,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const logout = useCallback(async () => {
     setIsLoading(true);
     try {
-      await mockAuthService.logout();
+      await authApi.logout();
       setState(null);
       setToken(null);
+      getApiClient().setAuthToken(null);
     } finally {
       setIsLoading(false);
     }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Search } from 'lucide-react';
 import { PageHeader, AssignmentCard, EmptyState } from '@/features/student';
-import { studentMockService } from '@/services/mock/studentMockService';
+import { studentApi } from '@/services/api/studentApi';
 import type { Assignment } from '@/types/student';
 
 type AssignmentStatus = 'all' | 'pending' | 'submitted' | 'graded' | 'overdue';
@@ -13,7 +13,7 @@ export function StudentAssignments() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    studentMockService.getAssignments().then((data) => {
+    studentApi.getAssignments().then((data) => {
       setAssignments(data);
       setLoading(false);
     });

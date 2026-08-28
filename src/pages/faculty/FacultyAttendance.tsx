@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Search, CheckSquare, Square, Save } from 'lucide-react';
 import { PageHeader, EmptyState } from '@/features/faculty';
-import { facultyMockService } from '@/services/mock/facultyMockService';
+import { facultyApi } from '@/services/api/facultyApi';
 import type {
   AttendanceSession,
   StudentWithAttendance,
@@ -37,8 +37,8 @@ export function FacultyAttendance() {
   useEffect(() => {
     async function loadData() {
       const [sessionsData, coursesData] = await Promise.all([
-        facultyMockService.getAttendanceSessions(),
-        facultyMockService.getCourses(),
+        facultyApi.getAttendanceSessions(),
+        facultyApi.getCourses(),
       ]);
       setSessions(sessionsData);
       setCourses(coursesData);
@@ -91,7 +91,7 @@ export function FacultyAttendance() {
   const handleSave = async () => {
     if (!selectedSession) return;
     setSaving(true);
-    await facultyMockService.saveAttendance(selectedSession.id, sessionStudents);
+    await facultyApi.saveAttendance(selectedSession.id, sessionStudents);
     setSaving(false);
     alert('Attendance saved successfully!');
   };

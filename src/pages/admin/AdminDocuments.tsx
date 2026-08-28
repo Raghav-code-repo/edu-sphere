@@ -10,7 +10,7 @@ import {
   Upload,
 } from 'lucide-react';
 import { PageHeader, DataTable, Drawer, FilterPanel, StatusBadge } from '@/features/admin';
-import { adminMockService } from '@/services/mock/adminMockService';
+import { adminApi } from '@/services/api/adminApi';
 import type { AdminDocument, FilterOptions } from '@/types/admin';
 
 const documentTypes = [
@@ -60,7 +60,7 @@ export function AdminDocuments() {
   useEffect(() => {
     async function loadData() {
       setLoading(true);
-      const response = await adminMockService.getDocuments(filters);
+      const response = await adminApi.getDocuments(filters);
       setDocuments(response.data);
       setTotalPages(response.totalPages);
       setTotal(response.total);
@@ -83,12 +83,12 @@ export function AdminDocuments() {
     if (!bulkAction || selectedRows.length === 0) return;
     for (const id of selectedRows) {
       if (bulkAction === 'delete') {
-        await adminMockService.deleteDocument(id);
+        await adminApi.deleteDocument(id);
       }
     }
     setSelectedRows([]);
     setBulkAction('');
-    const response = await adminMockService.getDocuments(filters);
+    const response = await adminApi.getDocuments(filters);
     setDocuments(response.data);
     setTotalPages(response.totalPages);
     setTotal(response.total);
@@ -112,8 +112,8 @@ export function AdminDocuments() {
   };
 
   const handleDelete = async (doc: AdminDocument) => {
-    await adminMockService.deleteDocument(doc.id);
-    const response = await adminMockService.getDocuments(filters);
+    await adminApi.deleteDocument(doc.id);
+    const response = await adminApi.getDocuments(filters);
     setDocuments(response.data);
     setTotalPages(response.totalPages);
     setTotal(response.total);
@@ -134,8 +134,8 @@ export function AdminDocuments() {
 
   const handleSave = async () => {
     setSaving(true);
-    await adminMockService.uploadDocument(formData);
-    const response = await adminMockService.getDocuments(filters);
+    await adminApi.uploadDocument(formData);
+    const response = await adminApi.getDocuments(filters);
     setDocuments(response.data);
     setDrawerOpen(false);
     setSaving(false);

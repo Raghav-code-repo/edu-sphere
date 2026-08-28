@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PageHeader, EmptyState, ChartCard } from '@/features/faculty';
-import { facultyMockService } from '@/services/mock/facultyMockService';
+import { facultyApi } from '@/services/api/facultyApi';
 import type { Report, StudentPerformanceData } from '@/types/faculty';
 import { FileText, Users, BarChart3, TrendingUp, Download } from 'lucide-react';
 import {
@@ -29,8 +29,8 @@ export function FacultyReports() {
   useEffect(() => {
     async function loadData() {
       const [reportsData, performance] = await Promise.all([
-        facultyMockService.getReports(),
-        facultyMockService.getStudentPerformance(),
+        facultyApi.getReports(),
+        facultyApi.getStudentPerformance(),
       ]);
       setReports(reportsData);
       setPerformanceData(performance);

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PageHeader, EmptyState } from '@/features/student';
-import { studentMockService } from '@/services/mock/studentMockService';
+import { studentApi } from '@/services/api/studentApi';
 import type { CalendarEvent } from '@/types/student';
 import { Calendar } from '@/components';
 
@@ -10,7 +10,7 @@ export function StudentCalendar() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    studentMockService.getCalendarEvents().then((data) => {
+    studentApi.getCalendarEvents().then((data) => {
       setEvents(data);
       setLoading(false);
     });

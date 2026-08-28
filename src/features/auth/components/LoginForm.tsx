@@ -34,7 +34,6 @@ export function LoginForm() {
   });
 
   const onSubmit = async (data: LoginFormData) => {
-    console.log('[Dev] Login submitted', { email: data.email });
     setError(null);
     try {
       const user = await login({
@@ -42,7 +41,6 @@ export function LoginForm() {
         password: data.password,
         rememberMe: data.rememberMe,
       });
-      console.log('[Dev] Login succeeded, role:', user.role);
       switch (user.role) {
         case 'STUDENT':
           navigate('/student/dashboard');
@@ -61,7 +59,6 @@ export function LoginForm() {
           navigate('/student/dashboard');
       }
     } catch (err) {
-      console.log('[Dev] Login error', err);
       setError(err instanceof Error ? err.message : 'Login failed. Please try again.');
     }
   };
@@ -120,6 +117,7 @@ export function LoginForm() {
               type="button"
               className="absolute inset-y-0 right-0 flex items-center pr-3"
               onClick={() => setShowPassword(!showPassword)}
+              aria-label={showPassword ? 'Hide password' : 'Show password'}
             >
               {showPassword ? (
                 <EyeOff className="h-4 w-4 text-gray-400" />

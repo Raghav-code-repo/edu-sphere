@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Search } from 'lucide-react';
 import { PageHeader, EmptyState } from '@/features/faculty';
-import { facultyMockService } from '@/services/mock/facultyMockService';
+import { facultyApi } from '@/services/api/facultyApi';
 import type { Student } from '@/types/faculty';
 
 export function FacultyStudents() {
@@ -10,7 +10,7 @@ export function FacultyStudents() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    facultyMockService.getStudents().then((data) => {
+    facultyApi.getStudents().then((data) => {
       setStudents(data);
       setLoading(false);
     });

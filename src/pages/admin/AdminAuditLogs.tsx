@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PageHeader, DataTable, FilterPanel } from '@/features/admin';
-import { adminMockService } from '@/services/mock/adminMockService';
+import { adminApi } from '@/services/api/adminApi';
 import type { AdminAuditLog, FilterOptions } from '@/types/admin';
 import { ChevronLeft, ChevronRight, Filter } from 'lucide-react';
 
@@ -28,7 +28,7 @@ export function AdminAuditLogs() {
   useEffect(() => {
     async function loadData() {
       setLoading(true);
-      const response = await adminMockService.getAuditLogs(filters);
+      const response = await adminApi.getAuditLogs(filters);
       setAuditLogs(response.data);
       setTotalPages(response.totalPages);
       setTotal(response.total);

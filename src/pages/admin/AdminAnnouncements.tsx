@@ -13,7 +13,7 @@ import {
   Archive,
 } from 'lucide-react';
 import { PageHeader, DataTable, Drawer, FilterPanel, StatusBadge } from '@/features/admin';
-import { adminMockService } from '@/services/mock/adminMockService';
+import { adminApi } from '@/services/api/adminApi';
 import type { AdminAnnouncement, FilterOptions } from '@/types/admin';
 
 const categories = [
@@ -66,7 +66,7 @@ export function AdminAnnouncements() {
   useEffect(() => {
     async function loadData() {
       setLoading(true);
-      const response = await adminMockService.getAnnouncements(filters);
+      const response = await adminApi.getAnnouncements(filters);
       setAnnouncements(response.data);
       setTotalPages(response.totalPages);
       setTotal(response.total);
@@ -89,21 +89,21 @@ export function AdminAnnouncements() {
     if (!bulkAction || selectedRows.length === 0) return;
     for (const id of selectedRows) {
       if (bulkAction === 'delete') {
-        await adminMockService.deleteAnnouncement(id);
+        await adminApi.deleteAnnouncement(id);
       } else if (bulkAction === 'publish') {
-        await adminMockService.publishAnnouncement(id);
+        await adminApi.publishAnnouncement(id);
       }
     }
     setSelectedRows([]);
     setBulkAction('');
-    const response = await adminMockService.getAnnouncements(filters);
+    const response = await adminApi.getAnnouncements(filters);
     setAnnouncements(response.data);
     setTotalPages(response.totalPages);
     setTotal(response.total);
   };
 
   const handleView = async (announcement: AdminAnnouncement) => {
-    const full = await adminMockService.getAnnouncement(announcement.id);
+    const full = await adminApi.getAnnouncement(announcement.id);
     if (full) {
       setSelectedAnnouncement(full);
       setDrawerOpen(true);
@@ -124,8 +124,8 @@ export function AdminAnnouncements() {
   };
 
   const handleDelete = async (announcement: AdminAnnouncement) => {
-    await adminMockService.deleteAnnouncement(announcement.id);
-    const response = await adminMockService.getAnnouncements(filters);
+    await adminApi.deleteAnnouncement(announcement.id);
+    const response = await adminApi.getAnnouncements(filters);
     setAnnouncements(response.data);
     setTotalPages(response.totalPages);
     setTotal(response.total);
@@ -133,15 +133,15 @@ export function AdminAnnouncements() {
   };
 
   const handlePublish = async (announcement: AdminAnnouncement) => {
-    await adminMockService.publishAnnouncement(announcement.id);
-    const response = await adminMockService.getAnnouncements(filters);
+    await adminApi.publishAnnouncement(announcement.id);
+    const response = await adminApi.getAnnouncements(filters);
     setAnnouncements(response.data);
     setActionMenu(null);
   };
 
   const handleArchive = async (announcement: AdminAnnouncement) => {
-    await adminMockService.updateAnnouncement(announcement.id, { status: 'archived' });
-    const response = await adminMockService.getAnnouncements(filters);
+    await adminApi.updateAnnouncement(announcement.id, { status: 'archived' });
+    const response = await adminApi.getAnnouncements(filters);
     setAnnouncements(response.data);
     setActionMenu(null);
   };
@@ -155,11 +155,11 @@ export function AdminAnnouncements() {
   const handleSave = async () => {
     setSaving(true);
     if (selectedAnnouncement) {
-      await adminMockService.updateAnnouncement(selectedAnnouncement.id, formData);
+      await adminApi.updateAnnouncement(selectedAnnouncement.id, formData);
     } else {
-      await adminMockService.createAnnouncement(formData);
+      await adminApi.createAnnouncement(formData);
     }
-    const response = await adminMockService.getAnnouncements(filters);
+    const response = await adminApi.getAnnouncements(filters);
     setAnnouncements(response.data);
     setDrawerOpen(false);
     setSaving(false);

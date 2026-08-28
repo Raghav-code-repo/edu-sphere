@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PageHeader, EmptyState, ScheduleItem } from '@/features/faculty';
-import { facultyMockService } from '@/services/mock/facultyMockService';
+import { facultyApi } from '@/services/api/facultyApi';
 import type { FacultyCalendarEvent } from '@/types/faculty';
 
 const today = new Date().toISOString().split('T')[0];
@@ -21,7 +21,7 @@ export function FacultyCalendar() {
   const [viewMode, setViewMode] = useState<'list' | 'calendar'>('list');
 
   useEffect(() => {
-    facultyMockService.getCalendarEvents().then((data) => {
+    facultyApi.getCalendarEvents().then((data) => {
       setEvents(data);
       setLoading(false);
     });

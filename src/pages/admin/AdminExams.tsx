@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PageHeader, DataTable, Drawer, FilterPanel, StatusBadge } from '@/features/admin';
-import { adminMockService } from '@/services/mock/adminMockService';
+import { adminApi } from '@/services/api/adminApi';
 import type { AdminExam, AdminExamResult, FilterOptions } from '@/types/admin';
 import {
   MoreVertical,
@@ -43,7 +43,7 @@ export function AdminExams() {
   useEffect(() => {
     async function loadData() {
       setLoading(true);
-      const response = await adminMockService.getExams(filters);
+      const response = await adminApi.getExams(filters);
       setExams(response.data);
       setTotalPages(response.totalPages);
       setTotal(response.total);
@@ -54,15 +54,15 @@ export function AdminExams() {
 
   const handleView = async (exam: AdminExam) => {
     setSelectedExam(exam);
-    const results = await adminMockService.getExamResults(exam.id);
+    const results = await adminApi.getExamResults(exam.id);
     setExamResults(results);
     setDrawerOpen(true);
     setActionMenu(null);
   };
 
   const handleDelete = async (id: string) => {
-    await adminMockService.deleteExam(id);
-    const response = await adminMockService.getExams(filters);
+    await adminApi.deleteExam(id);
+    const response = await adminApi.getExams(filters);
     setExams(response.data);
     setTotalPages(response.totalPages);
     setTotal(response.total);

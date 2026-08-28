@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PageHeader } from '@/features/student';
-import { studentMockService } from '@/services/mock/studentMockService';
+import { studentApi } from '@/services/api/studentApi';
 import type { StudentSettings } from '@/types/student';
 
 export function StudentSettings() {
@@ -14,13 +14,13 @@ export function StudentSettings() {
   const [saved, setSaved] = useState(false);
 
   useEffect(() => {
-    studentMockService.getSettings().then((data) => setSettings(data));
+    studentApi.getSettings().then((data) => setSettings(data));
   }, []);
 
   const handleToggle = async (key: keyof StudentSettings) => {
     setSaving(true);
     setSaved(false);
-    const updated = await studentMockService.updateSettings({ [key]: !settings[key] });
+    const updated = await studentApi.updateSettings({ [key]: !settings[key] });
     setSettings(updated);
     setSaving(false);
     setSaved(true);
@@ -30,7 +30,7 @@ export function StudentSettings() {
   const handleChange = async (key: keyof StudentSettings, value: string) => {
     setSaving(true);
     setSaved(false);
-    const updated = await studentMockService.updateSettings({ [key]: value });
+    const updated = await studentApi.updateSettings({ [key]: value });
     setSettings(updated);
     setSaving(false);
     setSaved(true);

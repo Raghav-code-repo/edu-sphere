@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { PageHeader } from '@/features/parent';
 import { Mail, MailOpen, Trash2 } from 'lucide-react';
-import { parentMockService } from '@/services/mock/parentMockService';
+import { parentApi } from '@/services/api/parentApi';
 import type { ParentMessage } from '@/types/parent';
 
 export function ParentMessages() {
@@ -10,7 +10,7 @@ export function ParentMessages() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    parentMockService.getMessages().then((data) => {
+    parentApi.getMessages().then((data) => {
       setMessages(data);
       setLoading(false);
     });

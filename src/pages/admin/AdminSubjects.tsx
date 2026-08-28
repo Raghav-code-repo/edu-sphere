@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Plus, ChevronLeft, ChevronRight, Filter, Eye, Edit2, Trash2 } from 'lucide-react';
 import { PageHeader, DataTable, Drawer, FilterPanel } from '@/features/admin';
-import { adminMockService } from '@/services/mock/adminMockService';
+import { adminApi } from '@/services/api/adminApi';
 import type { AdminSubject, FilterOptions } from '@/types/admin';
 
 export function AdminSubjects() {
@@ -32,7 +32,7 @@ export function AdminSubjects() {
   useEffect(() => {
     async function loadData() {
       setLoading(true);
-      const response = await adminMockService.getSubjects(filters);
+      const response = await adminApi.getSubjects(filters);
       setSubjects(response.data);
       setTotalPages(response.totalPages);
       setTotal(response.total);
@@ -52,7 +52,7 @@ export function AdminSubjects() {
   };
 
   const handleView = async (subject: AdminSubject) => {
-    const fullSubject = await adminMockService.getSubject(subject.id);
+    const fullSubject = await adminApi.getSubject(subject.id);
     if (fullSubject) {
       setSelectedSubject(fullSubject);
       setDrawerOpen(true);
@@ -65,8 +65,8 @@ export function AdminSubjects() {
   };
 
   const handleDelete = async (subject: AdminSubject) => {
-    await adminMockService.deleteSubject(subject.id);
-    const response = await adminMockService.getSubjects(filters);
+    await adminApi.deleteSubject(subject.id);
+    const response = await adminApi.getSubjects(filters);
     setSubjects(response.data);
     setTotalPages(response.totalPages);
     setTotal(response.total);

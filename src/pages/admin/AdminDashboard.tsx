@@ -25,7 +25,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { PageHeader } from '@/features/admin';
-import { adminMockService } from '@/services/mock/adminMockService';
+import { adminApi } from '@/services/api/adminApi';
 import type { AdminDashboardStats, AdminAnalytics } from '@/types/admin';
 
 export function AdminDashboard() {
@@ -36,8 +36,8 @@ export function AdminDashboard() {
   useEffect(() => {
     async function loadData() {
       const [dashboardStats, analyticsData] = await Promise.all([
-        adminMockService.getDashboardStats(),
-        adminMockService.getAnalytics(),
+        adminApi.getDashboardStats(),
+        adminApi.getAnalytics(),
       ]);
       setStats(dashboardStats);
       setAnalytics(analyticsData);

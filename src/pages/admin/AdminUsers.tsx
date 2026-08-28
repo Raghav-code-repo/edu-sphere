@@ -16,7 +16,7 @@ import {
   Activity,
 } from 'lucide-react';
 import { PageHeader, DataTable, Drawer, FilterPanel, StatusBadge } from '@/features/admin';
-import { adminMockService } from '@/services/mock/adminMockService';
+import { adminApi } from '@/services/api/adminApi';
 import type { AdminUser, FilterOptions } from '@/types/admin';
 
 export function AdminUsers() {
@@ -48,7 +48,7 @@ export function AdminUsers() {
   useEffect(() => {
     async function loadData() {
       setLoading(true);
-      const response = await adminMockService.getUsers(filters);
+      const response = await adminApi.getUsers(filters);
       setUsers(response.data);
       setTotalPages(response.totalPages);
       setTotal(response.total);
@@ -71,25 +71,25 @@ export function AdminUsers() {
     if (!bulkAction || selectedRows.length === 0) return;
     for (const id of selectedRows) {
       if (bulkAction === 'activate') {
-        await adminMockService.updateUser(id, { status: 'active' });
+        await adminApi.updateUser(id, { status: 'active' });
       } else if (bulkAction === 'deactivate') {
-        await adminMockService.deactivateUser(id);
+        await adminApi.deactivateUser(id);
       } else if (bulkAction === 'delete') {
-        await adminMockService.deleteUser(id);
+        await adminApi.deleteUser(id);
       } else if (bulkAction === 'reset-password') {
-        await adminMockService.updateUser(id, {});
+        await adminApi.updateUser(id, {});
       }
     }
     setSelectedRows([]);
     setBulkAction('');
-    const response = await adminMockService.getUsers(filters);
+    const response = await adminApi.getUsers(filters);
     setUsers(response.data);
     setTotalPages(response.totalPages);
     setTotal(response.total);
   };
 
   const handleView = async (user: AdminUser) => {
-    const fullUser = await adminMockService.getUser(user.id);
+    const fullUser = await adminApi.getUser(user.id);
     if (fullUser) {
       setSelectedUser(fullUser);
       setDrawerOpen(true);
@@ -103,15 +103,15 @@ export function AdminUsers() {
 
   const handleToggleStatus = async (user: AdminUser) => {
     const newStatus = user.status === 'active' ? 'inactive' : 'active';
-    await adminMockService.updateUser(user.id, { status: newStatus });
-    const response = await adminMockService.getUsers(filters);
+    await adminApi.updateUser(user.id, { status: newStatus });
+    const response = await adminApi.getUsers(filters);
     setUsers(response.data);
     setActionMenu(null);
   };
 
   const handleDelete = async (user: AdminUser) => {
-    await adminMockService.deleteUser(user.id);
-    const response = await adminMockService.getUsers(filters);
+    await adminApi.deleteUser(user.id);
+    const response = await adminApi.getUsers(filters);
     setUsers(response.data);
     setTotalPages(response.totalPages);
     setTotal(response.total);
@@ -119,7 +119,7 @@ export function AdminUsers() {
   };
 
   const handleResetPassword = async (user: AdminUser) => {
-    await adminMockService.updateUser(user.id, {});
+    await adminApi.updateUser(user.id, {});
     setActionMenu(null);
   };
 

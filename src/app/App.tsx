@@ -64,6 +64,12 @@ import { AdminAnalytics } from '@/pages/admin/AdminAnalytics';
 import { AdminDocuments } from '@/pages/admin/AdminDocuments';
 import { AdminAuditLogs } from '@/pages/admin/AdminAuditLogs';
 import { AdminSettings } from '@/pages/admin/AdminSettings';
+import {
+  SharedNotifications,
+  SharedMessages,
+  SharedCalendar,
+  SharedAnnouncements,
+} from '@/pages/shared';
 import { RoleRedirect, ProtectedRoute } from '@/features/auth';
 import { UnauthorizedPage } from '@/pages/Unauthorized';
 
@@ -100,6 +106,10 @@ export function App() {
         <Route path="messages/:id" element={<StudentMessages />} />
         <Route path="profile" element={<StudentProfile />} />
         <Route path="settings" element={<StudentSettings />} />
+        <Route path="notifications" element={<SharedNotifications />} />
+        <Route path="shared-messages" element={<SharedMessages />} />
+        <Route path="shared-calendar" element={<SharedCalendar />} />
+        <Route path="shared-announcements" element={<SharedAnnouncements />} />
       </Route>
 
       <Route
@@ -125,6 +135,10 @@ export function App() {
         <Route path="faculty-feedback" element={<ParentFacultyFeedback />} />
         <Route path="profile" element={<ParentProfile />} />
         <Route path="settings" element={<ParentSettings />} />
+        <Route path="notifications" element={<SharedNotifications />} />
+        <Route path="shared-messages" element={<SharedMessages />} />
+        <Route path="shared-calendar" element={<SharedCalendar />} />
+        <Route path="shared-announcements" element={<SharedAnnouncements />} />
       </Route>
 
       <Route
@@ -150,6 +164,10 @@ export function App() {
         <Route path="reports" element={<FacultyReports />} />
         <Route path="profile" element={<FacultyProfile />} />
         <Route path="settings" element={<FacultySettings />} />
+        <Route path="notifications" element={<SharedNotifications />} />
+        <Route path="shared-messages" element={<SharedMessages />} />
+        <Route path="shared-calendar" element={<SharedCalendar />} />
+        <Route path="shared-announcements" element={<SharedAnnouncements />} />
       </Route>
 
       <Route
@@ -180,6 +198,10 @@ export function App() {
         <Route path="documents" element={<AdminDocuments />} />
         <Route path="audit-logs" element={<AdminAuditLogs />} />
         <Route path="settings" element={<AdminSettings />} />
+        <Route path="notifications" element={<SharedNotifications />} />
+        <Route path="shared-messages" element={<SharedMessages />} />
+        <Route path="shared-calendar" element={<SharedCalendar />} />
+        <Route path="shared-announcements" element={<SharedAnnouncements />} />
       </Route>
     </Routes>
   );

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PageHeader } from '@/features/admin';
-import { adminMockService } from '@/services/mock/adminMockService';
+import { adminApi } from '@/services/api/adminApi';
 import type { AdminAnalytics } from '@/types/admin';
 import {
   LineChart,
@@ -33,7 +33,7 @@ export function AdminAnalytics() {
   useEffect(() => {
     async function loadAnalytics() {
       setLoading(true);
-      const data = await adminMockService.getAnalytics();
+      const data = await adminApi.getAnalytics();
       setAnalytics(data);
       setLoading(false);
     }

@@ -11,7 +11,7 @@ import {
   BarChart,
   Bar,
 } from 'recharts';
-import { parentMockService } from '@/services/mock/parentMockService';
+import { parentApi } from '@/services/api/parentApi';
 import type { Child, ChildAttendanceSummary } from '@/types/parent';
 
 export function ParentAttendance() {
@@ -23,8 +23,8 @@ export function ParentAttendance() {
   useEffect(() => {
     async function loadData() {
       const [childrenData, summariesData] = await Promise.all([
-        parentMockService.getChildren(),
-        parentMockService.getChildAttendanceSummary(),
+        parentApi.getChildren(),
+        parentApi.getChildAttendanceSummary(),
       ]);
       setChildren(childrenData);
       setSelectedChildId(childrenData[0]?.id || '');

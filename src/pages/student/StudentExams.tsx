@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Search } from 'lucide-react';
 import { PageHeader, ExamCard, EmptyState } from '@/features/student';
-import { studentMockService } from '@/services/mock/studentMockService';
+import { studentApi } from '@/services/api/studentApi';
 import type { Exam } from '@/types/student';
 
 type ExamStatus = 'all' | 'upcoming' | 'completed' | 'missed';
@@ -13,7 +13,7 @@ export function StudentExams() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    studentMockService.getExams().then((data) => {
+    studentApi.getExams().then((data) => {
       setExams(data);
       setLoading(false);
     });
